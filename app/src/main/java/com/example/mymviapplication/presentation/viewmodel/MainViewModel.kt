@@ -5,14 +5,17 @@ import androidx.lifecycle.viewModelScope
 import com.example.mymviapplication.data.repository.MainRepository
 import com.example.mymviapplication.presentation.interactors.MainIntent
 import com.example.mymviapplication.presentation.state.MainState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel(private val repository: MainRepository) : ViewModel() {
-    private val userIntent = Channel<MainIntent>(Channel.UNLIMITED)
+@HiltViewModel
+class MainViewModel @Inject constructor(private val repository: MainRepository) : ViewModel() {
+    val userIntent = Channel<MainIntent>(Channel.UNLIMITED)
     private val _state = MutableStateFlow<MainState>(MainState.Idle)
     val state: StateFlow<MainState>
         get() = _state
