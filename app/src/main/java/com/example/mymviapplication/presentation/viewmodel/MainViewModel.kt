@@ -1,46 +1,58 @@
 package com.example.mymviapplication.presentation.viewmodel
 
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mymviapplication.data.repository.MainRepository
 import com.example.mymviapplication.presentation.interactors.MainIntent
+import com.example.mymviapplication.presentation.state.CatState
 import com.example.mymviapplication.presentation.state.MainState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
+import java.io.IOException
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(private val repository: MainRepository) : ViewModel() {
-    val userIntent = Channel<MainIntent>(Channel.UNLIMITED)
-    private val _state = MutableStateFlow<MainState>(MainState.Idle)
-    val state: StateFlow<MainState>
-        get() = _state
+    private val _stateUsers = mutableStateOf<MainState>(MainState.Loading)
+    val state: State<MainState> = _stateUsers
 
-    init {
-        handleIntent()
+    private val _stateCats = mutableStateOf<CatState>(CatState.Loading)
+    val catState: State<CatState> = _stateCats
+
+
+    fun getListIntent(intent: MainIntent) {
+        when (intent) {
+            is MainIntent.UserListLoad -> getUserList()
+            is MainIntent.CatsFactListLoaded -> getCatsFact()
+        }
     }
 
-    private fun handleIntent() {
+    private fun getUserList() {
         viewModelScope.launch {
-            userIntent.consumeAsFlow().collect {
-                when (it) {
-                    is MainIntent.FetchUser -> fetchUser()
-                }
+            _stateUsers.value = MainState.Loading
+            try {
+                _stateUsers.value = MainState.Success(
+                    repository.getUsers()
+                )
+            } catch (e: IOException) {
+                _stateUsers.value = MainState.Error(
+                    "Error"
+                )
             }
         }
     }
 
-    private fun fetchUser() {
+    private fun getCatsFact() {
         viewModelScope.launch {
-            _state.value = MainState.Loading
-            _state.value = try {
-                MainState.Users(repository.getUsers())
-            } catch (e: Exception) {
-                MainState.Error(e.localizedMessage)
+            _stateCats.value = CatState.Loading
+            try {
+                _stateCats.value = CatState.Success(
+                    repository.getCats()
+                )
+            } catch (e: IOException) {
+                _stateCats.value = CatState.Error("Error")
             }
         }
     }
