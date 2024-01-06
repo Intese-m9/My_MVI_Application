@@ -18,7 +18,7 @@ private const val TT = 20
 fun UsersList(userList: List<User>) {
     Column {
         Text(
-            text = "RandomData",
+            text = "RandomDataUsers",
             fontWeight = FontWeight(900),
             fontFamily = FontFamily.Cursive,
             fontSize = 32.sp,

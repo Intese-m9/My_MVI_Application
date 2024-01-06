@@ -1,6 +1,5 @@
 package com.example.mymviapplication.data.model.modelCat
 
-
 data class Cats(
     val current_page: Int,
     val data: List<Data>,

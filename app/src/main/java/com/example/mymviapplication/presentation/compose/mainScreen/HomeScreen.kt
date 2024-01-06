@@ -1,5 +1,6 @@
 package com.example.mymviapplication.presentation.compose.mainScreen
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -11,11 +12,9 @@ import com.example.mymviapplication.presentation.compose.composeNavigation.Route
 
 @Composable
 fun HomeScreen(navController: NavController) {
-    Column {
+    Column(verticalArrangement = Arrangement.Center) {
         Button(
-            onClick = {
-                navController.navigate(Routes.ListUser.routes)
-            },
+            onClick = { navController.navigate(Routes.ListUser.routes) },
             modifier = Modifier.align(Alignment.CenterHorizontally)
         ) {
             Text(text = "Users")

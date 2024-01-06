@@ -18,7 +18,7 @@ import com.example.mymviapplication.data.model.modelCat.Cats
 fun CatsAndOther(catFacts: Cats) {
     Column {
         Text(
-            text = "RandomData",
+            text = "RandomDataCats",
             fontWeight = FontWeight(900),
             fontFamily = FontFamily.Cursive,
             fontSize = 32.sp,

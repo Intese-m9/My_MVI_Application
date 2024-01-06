@@ -12,7 +12,7 @@ import javax.inject.Singleton
 class DataModule {
     @Provides
     @Singleton
-    fun prodvideRepository():MainRepository{
+    fun prodvideRepository(): MainRepository {
         return MainRepository()
     }
 }
