@@ -13,7 +13,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mymviapplication.data.model.modelUser.User
-private const val TT = 20
+
 @Composable
 fun UsersList(userList: List<User>) {
     Column {
@@ -27,8 +27,8 @@ fun UsersList(userList: List<User>) {
                 .padding(8.dp)
         )
         LazyColumn{
-            items(items = userList.take(TT)) { users ->
-                UserCard(user = users)
+            items(items = userList) { user ->
+                UserCard(user = user)
             }
         }
     }

@@ -8,7 +8,6 @@ import com.example.mymviapplication.domain.usecase.GetCatsDataUseCase
 import com.example.mymviapplication.domain.usecase.GetUsersDataUseCase
 import com.example.mymviapplication.presentation.interactors.MainIntent
 import com.example.mymviapplication.presentation.state.CatState
-import com.example.mymviapplication.presentation.state.MainState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.io.IOException
@@ -18,9 +17,8 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val getCatsDataUseCase: GetCatsDataUseCase,
     private val getUsersDataUseCase: GetUsersDataUseCase
-) : ViewModel() {
-    private val _stateUsers = mutableStateOf<MainState>(MainState.Loading)
-    val state: State<MainState> = _stateUsers
+) : ViewModel() {/*   private val _stateUsers = mutableStateOf<MainState>(MainState.Loading)
+       val state: State<MainState> = _stateUsers*/
 
     private val _stateCats = mutableStateOf<CatState>(CatState.Loading)
     val catState: State<CatState> = _stateCats
@@ -28,25 +26,27 @@ class MainViewModel @Inject constructor(
 
     fun getListIntent(intent: MainIntent) {
         when (intent) {
-            is MainIntent.UserListLoad -> getUserList()
+            is MainIntent.UserListLoad -> getUsersPagination()
             is MainIntent.CatsFactListLoaded -> getCatsFact()
         }
     }
 
-    private fun getUserList() {
-        viewModelScope.launch {
-            _stateUsers.value = MainState.Loading
-            try {
-                _stateUsers.value = MainState.Success(
-                    getUsersDataUseCase.getUsersList()
-                )
-            } catch (e: IOException) {
-                _stateUsers.value = MainState.Error(
-                    "Error"
-                )
-            }
-        }
-    }
+    fun getUsersPagination() = getUsersDataUseCase.invokePaging()
+
+    /* private fun getUserList() {
+         viewModelScope.launch {
+             _stateUsers.value = MainState.Loading
+             try {
+                 _stateUsers.value = MainState.Success(
+                     getUsersDataUseCase.getUsersList(30)
+                 )
+             } catch (e: IOException) {
+                 _stateUsers.value = MainState.Error(
+                     "Error"
+                 )
+             }
+         }
+     }*/
 
     private fun getCatsFact() {
         viewModelScope.launch {

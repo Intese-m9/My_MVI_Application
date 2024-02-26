@@ -1,5 +1,8 @@
 package com.example.mymviapplication.data.api
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import com.example.mymviapplication.domain.pagination.UserSource
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
@@ -16,4 +19,9 @@ object RetrofitBuilder {
 
     val apiService: ApiService = getUserRetrofit().create(ApiService::class.java)
     val apiCatService: ApiService = getCatsRetrofit().create(ApiService::class.java)
+    fun getPagingAllPost() = Pager(
+        config = PagingConfig(pageSize = 20),
+        pagingSourceFactory = { UserSource(apiService = apiService)}
+    ).flow
+
 }
