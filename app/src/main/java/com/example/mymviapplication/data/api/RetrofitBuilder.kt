@@ -19,9 +19,7 @@ object RetrofitBuilder {
 
     val apiService: ApiService = getUserRetrofit().create(ApiService::class.java)
     val apiCatService: ApiService = getCatsRetrofit().create(ApiService::class.java)
-    fun getPagingAllPost() = Pager(
-        config = PagingConfig(pageSize = 20),
-        pagingSourceFactory = { UserSource(apiService = apiService)}
-    ).flow
+    fun getPagingAllPost() = Pager(config = PagingConfig(pageSize = 20),
+        pagingSourceFactory = { UserSource(apiService = apiService) }).flow
 
 }

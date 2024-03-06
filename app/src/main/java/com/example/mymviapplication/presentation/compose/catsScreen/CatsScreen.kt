@@ -23,7 +23,6 @@ fun CatsScreen(mainViewModel: MainViewModel) {
     }
 
     LaunchedEffect(Unit) {
-        mainViewModel.getListIntent(MainIntent.UserListLoad)
         mainViewModel.getListIntent(MainIntent.CatsFactListLoaded)
     }
 }
