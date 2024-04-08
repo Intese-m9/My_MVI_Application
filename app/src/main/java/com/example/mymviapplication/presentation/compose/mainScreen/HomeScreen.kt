@@ -11,7 +11,8 @@ import androidx.navigation.NavController
 import com.example.mymviapplication.presentation.compose.composeNavigation.Routes
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(
+    navController: NavController) {
     Column(verticalArrangement = Arrangement.Center) {
         Button(
             onClick = { navController.navigate(Routes.ListUser.routes) },

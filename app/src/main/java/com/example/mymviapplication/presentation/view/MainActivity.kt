@@ -15,6 +15,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.mymviapplication.domain.permissions.RuntimePermissionDialog
 import com.example.mymviapplication.domain.usecase.StartWorkManagerUseCase
+import com.example.mymviapplication.presentation.compose.auth.LoginScreen
 import com.example.mymviapplication.presentation.compose.catsScreen.CatsScreen
 import com.example.mymviapplication.presentation.compose.composeNavigation.Routes
 import com.example.mymviapplication.presentation.compose.mainScreen.HomeScreen
@@ -42,7 +43,10 @@ class MainActivity : ComponentActivity() {
                         onPermissionDenied = {},
                         onPermissionGranted = {},
                     )
-                    NavHost(navController = navController, startDestination = Routes.Home.routes) {
+                    NavHost(navController = navController, startDestination = Routes.LoginScreen.routes) {
+                        composable(Routes.LoginScreen.routes){
+                            LoginScreen(navController = navController)
+                        }
                         composable(Routes.Home.routes) {
                             HomeScreen(navController = navController)
                         }

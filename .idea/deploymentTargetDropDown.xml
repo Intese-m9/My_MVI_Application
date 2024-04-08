@@ -2,6 +2,21 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="Counter">
+        <State />
+      </entry>
+      <entry key="CustomApplication">
+        <State />
+      </entry>
+      <entry key="MyComposable">
+        <State />
+      </entry>
+      <entry key="RunTimerScreen">
+        <State />
+      </entry>
+      <entry key="TimerScreen">
+        <State />
+      </entry>
       <entry key="app">
         <State />
       </entry>
