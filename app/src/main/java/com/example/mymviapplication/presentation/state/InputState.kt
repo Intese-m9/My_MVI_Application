@@ -9,7 +9,7 @@ enum class InputType{
 }
 data class InputState (
     val text: String = "",
-    val isValid: Boolean = true,
+    val isValid: Boolean = false,
     val type: InputType,
     val errorMessage: String = ""
 )

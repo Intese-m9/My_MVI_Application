@@ -81,7 +81,7 @@ fun LoginScreen(
                 contentColor = Color.White,
                 disabledContentColor = Color.Gray
             ),
-            enabled = loginFormState.formValid
+            enabled = loginFormState.password.isValid && loginFormState.email.isValid
         ) {
             Text(
                 text = "Login"
