@@ -12,7 +12,7 @@ class LoginViewModel : ViewModel() {
     private val _state = mutableStateOf(LoginState(formValid = true))
     val state: State<LoginState> = _state
 
-    fun createEvent(event: LoginIntent) {//публичный метод передает события в данную вьюмодель
+     fun createEvent(event: LoginIntent) {//публичный метод передает события в данную вьюмодель
         //абстрактная прослойка между компоуз экраном и нашей моделькой
         onEvent(event = event)
     }

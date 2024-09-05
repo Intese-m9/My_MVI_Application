@@ -1,6 +1,7 @@
 package com.example.mymviapplication.di
 
-import com.example.mymviapplication.data.repository.MainRepository
+import com.example.mymviapplication.data.repository.MainRepositoryImpl
+import com.example.mymviapplication.domain.MainRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,7 +13,7 @@ import javax.inject.Singleton
 class DataModule {
     @Provides
     @Singleton
-    fun prodvideRepository(): MainRepository {
-        return MainRepository()
+    fun provideRepository(): MainRepository {
+        return MainRepositoryImpl()
     }
 }

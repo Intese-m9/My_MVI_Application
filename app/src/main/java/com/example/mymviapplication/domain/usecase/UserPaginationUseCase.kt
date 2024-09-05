@@ -1,11 +1,11 @@
-package com.example.mymviapplication.domain.pagination
+package com.example.mymviapplication.domain.usecase
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.mymviapplication.data.api.ApiService
 import com.example.mymviapplication.data.model.modelUser.User
 
-class UserSource(private val apiService: ApiService) : PagingSource<Int, User>() {
+class UserPaginationUseCase(private val apiService: ApiService) : PagingSource<Int, User>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, User> {
         return try {
             val page = params.key ?: 1
