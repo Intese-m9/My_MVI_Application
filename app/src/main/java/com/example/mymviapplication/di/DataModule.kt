@@ -1,7 +1,7 @@
 package com.example.mymviapplication.di
 
 import com.example.mymviapplication.data.repository.MainRepositoryImpl
-import com.example.mymviapplication.domain.MainRepository
+import com.example.mymviapplication.data.MainRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

@@ -2,6 +2,7 @@ package com.example.mymviapplication.presentation.view
 
 import android.os.Build
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -27,6 +28,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private val mainViewModel: MainViewModel by viewModels()
+
+    // TODO: Проверить можно ли добавить воркер в di и инициализировать не через by lazy
     private val startWorkManager by lazy { StartWorkManagerUseCase() }
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,8 +42,10 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val navController = rememberNavController()
                     RuntimePermissionDialog(
-                        android.Manifest.permission.POST_NOTIFICATIONS,
-                        onPermissionDenied = {},
+                        android.Manifest.permission.CAMERA,
+                        onPermissionDenied = {
+                            Toast.makeText(this, "Для дальнейшей работы приложения нужно разрешение", Toast.LENGTH_LONG).show()
+                        },
                         onPermissionGranted = {},
                     )
                     NavHost(navController = navController, startDestination = Routes.LoginScreen.routes) {

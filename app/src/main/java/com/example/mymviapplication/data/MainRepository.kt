@@ -1,4 +1,4 @@
-package com.example.mymviapplication.domain
+package com.example.mymviapplication.data
 
 import androidx.paging.PagingData
 import com.example.mymviapplication.data.model.modelCat.Cats

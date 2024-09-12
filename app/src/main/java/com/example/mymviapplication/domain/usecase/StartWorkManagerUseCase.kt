@@ -12,11 +12,13 @@ class StartWorkManagerUseCase {
     private val constraints = Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build()
     private val workName = "DemoWorker"
     fun startWorker(context: Context) {
-        val workManager = WorkManager.getInstance(context)
+        val workManager = WorkManager
+            .getInstance(context)
         val workRequest =
             OneTimeWorkRequestBuilder<DemoWorker>().setConstraints(constraints = constraints)
                 .build()
-        workManager.enqueueUniqueWork(
+        workManager
+            .enqueueUniqueWork(
             workName, ExistingWorkPolicy.REPLACE, workRequest
         )
     }

@@ -13,8 +13,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat.getSystemService
-import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
+import androidx.work.Worker
 import androidx.work.WorkerParameters
 
 import com.example.mymviapplication.R
@@ -24,18 +24,23 @@ import kotlin.concurrent.schedule
 import kotlin.properties.Delegates
 
 class DemoWorker(
-   private val appContext: Context, params: WorkerParameters
-) : CoroutineWorker(appContext, params) {
+    private val appContext: Context, params: WorkerParameters
+) : Worker(appContext, params) {
     private val notificationChannelId = "DemoNotificationChannelId"
-    override suspend fun doWork(): Result {
+    override fun doWork(): Result {
         // Use
-        Timer().schedule(10000){
-            if (ActivityCompat.checkSelfPermission(appContext, Manifest.permission.POST_NOTIFICATIONS)
-                == PackageManager.PERMISSION_GRANTED){
-                with(NotificationManagerCompat.from(applicationContext)){
-                    notify(0,createNotification())
+        Timer().schedule(10000) {
+            if (ActivityCompat.checkSelfPermission(
+                    appContext,
+                    Manifest.permission.POST_NOTIFICATIONS
+                )
+                == PackageManager.PERMISSION_GRANTED
+            ) {
+                with(NotificationManagerCompat.from(applicationContext)) {
+                    notify(0, createNotification())
                 }
-            }        }
+            }
+        }
         Log.d("DemoWorker", "do work done!")
         return Result.success()
     }
@@ -69,7 +74,8 @@ class DemoWorker(
             .setAutoCancel(true)
             .build()
     }
-    override suspend fun getForegroundInfo(): ForegroundInfo {
+
+    override fun getForegroundInfo(): ForegroundInfo {
         return ForegroundInfo(
             0, createNotification()
         )
