@@ -13,7 +13,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat.getSystemService
-import androidx.work.ForegroundInfo
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 
@@ -73,11 +72,5 @@ class DemoWorker(
             .setContentIntent(mainActivityPendingIntent)
             .setAutoCancel(true)
             .build()
-    }
-
-    override fun getForegroundInfo(): ForegroundInfo {
-        return ForegroundInfo(
-            0, createNotification()
-        )
     }
 }
