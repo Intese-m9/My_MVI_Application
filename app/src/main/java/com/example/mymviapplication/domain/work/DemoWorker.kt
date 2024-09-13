@@ -15,7 +15,6 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-
 import com.example.mymviapplication.R
 import com.example.mymviapplication.presentation.view.MainActivity
 import java.util.Timer
