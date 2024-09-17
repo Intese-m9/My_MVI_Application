@@ -8,5 +8,4 @@ class GetUsersDataUseCase @Inject constructor(private val mainRepository: MainRe
         return mainRepository.getUsers(page,limit)
     }*/
     fun invokePaging() = mainRepository.getUserPagination()
-
 }

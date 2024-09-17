@@ -1,6 +1,5 @@
 package com.example.mymviapplication.presentation.compose.userScreen
 
-
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -14,7 +13,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.items
 import com.example.mymviapplication.presentation.compose.stateScreen.ErrorScreen
 import com.example.mymviapplication.presentation.compose.stateScreen.LoadingScreen
 import com.example.mymviapplication.presentation.viewmodel.MainViewModel
@@ -33,21 +31,28 @@ fun UsersScreen(mainViewModel: MainViewModel) {
                 .padding(8.dp)
         )
         LazyColumn {
-            items(data) { user ->
-                user?.let { UserCard(user = it) }
+            /* items(data) { user ->
+                 user?.let { UserCard(user = it) }
+             }*/
+            items(data.itemCount) { index ->
+                data[index]?.let { item ->
+                    UserCard(user = item)
+                }
             }
-            item {
-                when (data.loadState.refresh) {
-                    is LoadState.Error -> {
+            when (data.loadState.refresh) {
+                is LoadState.Error -> {
+                    item {
                         ErrorScreen()
                     }
+                }
 
-                    is LoadState.Loading -> {
+                is LoadState.Loading -> {
+                    item {
                         LoadingScreen()
                     }
-
-                    else -> {}
                 }
+
+                else -> {}
             }
         }
     }
